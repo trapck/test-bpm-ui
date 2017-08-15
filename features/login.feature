@@ -1,5 +1,5 @@
 @login
-Feature: I can login
+Feature: I can login and fail to login
   
   Scenario: Login to app with correct data
     Given I am on the Login page
@@ -10,7 +10,7 @@ Feature: I can login
 
   Scenario: Unable to login with incorrect data
     Given I am on the Login page1
-    When I enter incorrect login
-    And I enter incorrect password
+    When I enter invalid login
+    And I enter invalid password
     And I click login button1
     Then I should see warning message

@@ -1,21 +1,20 @@
-'use strict';
+"use strict";
 
-var chromedriver = require('chromedriver');
-var selenium = require('selenium-webdriver');
+const chromeDriver = require("chromedriver");
+const selenium = require("selenium-webdriver");
 
-module.exports = function() {
-
-	var driver = new selenium.Builder().withCapabilities({
-		browserName: 'chrome',
+const driver = function() {
+	const driver = new selenium.Builder().withCapabilities({
+		browserName: "chrome",
 		javascriptEnabled: true,
 		acceptSslCerts: true,
 		chromeOptions: {
-			args: ['start-maximized']
+			args: ["start-maximized"]
 		},
-		path: chromedriver.path
+		path: chromeDriver.path
 	}).build();
-
 	driver.manage().window().maximize();
-
 	return driver;
 };
+
+module.exports = driver;

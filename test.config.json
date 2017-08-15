@@ -4,5 +4,6 @@
     "shared_obj_dir": "./shared-objects",
     "reports_dir": "./reports",
     "default_browser": "chrome",
-    "timeout": 30000
+    "timeout": 30000,
+    "commonSleepTimeout": 1000
 }

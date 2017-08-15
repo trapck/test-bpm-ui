@@ -1,10 +1,11 @@
+"use strict";
+
+const selectors = {
+	loginEdit: "#loginEdit-el",
+	passwordEdit: "#passwordEdit-el",
+	loginButton: "#t-comp12-textEl"
+};
+
 module.exports = {
-	url: 'http://localhost/bpm/kazan',
-	elements: {
-		loginEdit: '#loginEdit-el',
-		passEdit: '#passwordEdit-el',
-		loginButton: '#t-comp12-textEl',
-		messageBox: '.ts-messagebox-cover',
-		centerPanel: '#centerPanel'
-	}
+	selectors
 };

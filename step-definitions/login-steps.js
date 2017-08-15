@@ -1,86 +1,81 @@
+"use strict";
+
 module.exports = function () {
+	this.Given(
+		/^I am on the Login page$/,
+		() => driverUtils.loadPage(shared.commonConstants.baseUrl)
+	);
 
-	this.Given(/^I am on the Login page$/, function () {
-		return helpers.loadPage(page.login.url);
-	});
-
-	this.When(/^I enter correct login$/, function () {
-		return driver.wait(until.elementsLocated(by.css(page.login.elements.loginEdit)), 20000).then(function() {
-				return driver.findElements(by.css(page.login.elements.loginEdit));
+	this.When(
+		/^I enter correct login$/,
+		() => driver.wait(until.elementsLocated(by.css(page.login.selectors.loginEdit)), DEFAULT_TIMEOUT)
+			.then(() => driver.findElements(by.css(page.login.selectors.loginEdit)))
+			.then(elements => {
+				elements[0].sendKeys("");
+				elements[0].sendKeys(shared.commonTestData.login);
+				driverUtils.sleep();
 			})
-			.then(function (elements) {
-				elements[0].sendKeys(shared.testData.username);
-			});
-	});
+	);
 
-	this.Before({timeout: 60 * 1000}, function() {
-
-	});
-
-	this.When(/^I enter correct password$/, function () {
-		return driver.wait(until.elementsLocated(by.css(page.login.elements.passEdit)), 100).then(function() {
-				return driver.findElements(by.css(page.login.elements.passEdit));
+	this.When(
+		/^I enter correct password$/,
+		() => driver.findElements(by.css(page.login.selectors.passwordEdit))
+			.then(elements => {
+				elements[0].sendKeys("");
+				elements[0].sendKeys(shared.commonTestData.password);
+				driverUtils.sleep();
 			})
-			.then(function (elements) {
-				elements[0].sendKeys(shared.testData.password);
-			});
-	});
+	);
 
-	this.When(/^I click login button$/, function () {
-		return driver.wait(until.elementsLocated(by.css(page.login.elements.loginButton)), 100).then(function() {
-				return driver.findElements(by.css(page.login.elements.loginButton));
+	this.When(
+		/^I click login button$/,
+		() => driver.findElements(by.css(page.login.selectors.loginButton))
+			.then(elements => elements[0].click())
+	);
+
+	this.Then(
+		/^I should see start page$/,
+		() => driver.wait(until.elementsLocated(by.css(shared.commonSelectors.centerPanelId)), DEFAULT_TIMEOUT)
+			.then(() => driver.findElements(by.css(shared.commonSelectors.centerPanelId)))
+			.then(elements => expect(elements.length).to.not.equal(0))
+	);
+
+	this.Given(
+		/^I am on the Login page1$/,
+		() => driverUtils.loadPage(shared.commonConstants.baseUrl)
+	);
+
+	this.When(
+		/^I enter invalid login$/,
+		() => driver.wait(until.elementsLocated(by.css(page.login.selectors.loginEdit)), DEFAULT_TIMEOUT)
+			.then(() => driver.findElements(by.css(page.login.selectors.loginEdit)))
+			.then(elements => {
+				elements[0].sendKeys("");
+				elements[0].sendKeys(shared.loginTestData.invalidLogin);
+				driverUtils.sleep();
 			})
-			.then(function (elements) {
-				elements[0].click();
-			});
-	});
+	);
 
-	this.Then(/^I should see start page$/, function () {
-		return driver.wait(until.elementsLocated(by.css(page.login.elements.centerPanel)), 20000).then(function() {
-				return driver.findElements(by.css(page.login.elements.centerPanel));
+	this.When(
+		/^I enter invalid password$/,
+		() => driver.findElements(by.css(page.login.selectors.passwordEdit))
+			.then(elements => {
+				elements[0].sendKeys("");
+				elements[0].sendKeys(shared.loginTestData.invalidPassword);
+				driverUtils.sleep();
 			})
-			.then(function (elements) {
-				expect(elements.length).to.not.equal(0);
-			});
-	});
+	);
 
-	this.Given(/^I am on the Login page1$/, function () {
-		return helpers.loadPage(page.login.url);
-	});
+	this.When(
+		/^I click login button1$/,
+		() => driver.findElements(by.css(page.login.selectors.loginButton))
+			.then(elements => elements[0].click())
+	);
 
-	this.When(/^I enter incorrect login$/, function () {
-		return driver.wait(until.elementsLocated(by.css(page.login.elements.loginEdit)), 20000).then(function() {
-				return driver.findElements(by.css(page.login.elements.loginEdit));
-			})
-			.then(function (elements) {
-				elements[0].sendKeys(shared.testData.incorrectUsername);
-			});
-	});
-
-	this.When(/^I enter incorrect password$/, function () {
-		return driver.wait(until.elementsLocated(by.css(page.login.elements.passEdit)), 100).then(function() {
-				return driver.findElements(by.css(page.login.elements.passEdit));
-			})
-			.then(function (elements) {
-				elements[0].sendKeys(shared.testData.incorrectPassword);
-			});
-	});
-
-	this.When(/^I click login button1$/, function () {
-		return driver.wait(until.elementsLocated(by.css(page.login.elements.loginButton)), 100).then(function() {
-				return driver.findElements(by.css(page.login.elements.loginButton));
-			})
-			.then(function (elements) {
-				elements[0].click();
-			});
-	});
-
-	this.Then(/^I should see warning message$/, function () {
-		return driver.wait(until.elementsLocated(by.css(page.login.elements.messageBox)), 20000).then(function() {
-				return driver.findElements(by.css(page.login.elements.messageBox));
-			})
-			.then(function (elements) {
-				expect(elements.length).to.not.equal(0);
-			});
-	});
+	this.Then(
+		/^I should see warning message$/,
+		() => driver.wait(until.elementsLocated(by.css(shared.commonSelectors.messageBoxClass)), DEFAULT_TIMEOUT)
+			.then(() => driver.findElements(by.css(shared.commonSelectors.messageBoxClass)))
+			.then(elements => expect(elements.length).to.not.equal(0))
+	);
 };
