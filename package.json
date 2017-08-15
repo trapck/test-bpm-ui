@@ -1,0 +1,31 @@
+{
+  "name": "bpm-selenium-cucumber-test",
+  "version": "1.0.0",
+  "description": "Test project to test bpmonline",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": {
+    "name": "Denis Vorona"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/john-doherty/selenium-cucumber-js.git"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "chai": "^3.5.0",
+    "chalk": "^1.1.3",
+    "chromedriver": "^2.31.0",
+    "commander": "^2.11.0",
+    "cucumber": "^1.3.3",
+    "cucumber-html-reporter": "^2.0.3",
+    "cucumber-junit": "^1.7.0",
+    "fs-plus": "^2.10.1",
+    "geckodriver": "^1.8.0",
+    "merge": "^1.2.0",
+    "require-dir": "^0.3.2",
+    "selenium-webdriver": "^3.5.0"
+  }
+}

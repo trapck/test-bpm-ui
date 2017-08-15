@@ -1,0 +1,8 @@
+{
+    "step_def_dir": "./step-definitions",
+    "page_obj_dir": "./page-objects",
+    "shared_obj_dir": "./shared-objects",
+    "reports_dir": "./reports",
+    "default_browser": "chrome",
+    "timeout": 30000
+}
